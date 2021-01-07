@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 # GEM USED FOR PROJECT #######
 gem "figaro"
+gem 'active_model_serializers'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

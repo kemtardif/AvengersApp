@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class NewRecipe extends React.Component {
+class NewRAvenger extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         name: "",
-        ingredients: "",
-        instruction: ""
+        legalName: "",
+        status: "",
+        description = "",
+        featured_image = null,
+        age = ""
       };
   
       this.onChange = this.onChange.bind(this);

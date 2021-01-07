@@ -12,3 +12,28 @@
       instruction: 'In a medium saucepan, stir the clotted cream, butter, and cornflour over a low-ish heat and bring to a low simmer. Turn off the heat and keep warm.'
     )
   end
+
+  hulk =Avenger.create(
+      name: "Hulk",
+      legalName: "Robert Bruce Banner",
+      status: "Active"
+  )
+  hulk.featured_image.attach(io: File.open(Rails.root.join('app/assets/images/hulk.jpeg')), filename: 'hulk.jpeg', content_type: 'image/jpeg')
+  hulk.save!
+
+ironMan =Avenger.create(
+    name: "Iron Man",
+    legalName: "Tony Stark",
+    status: "Active"
+)
+ironMan.featured_image.attach(io: File.open(Rails.root.join('app/assets/images/ironman.jpeg')), filename: 'ironman.jpeg', content_type: 'image/jpeg')
+ironMan.save!
+
+
+thor =Avenger.create(
+    name: "Thor",
+    legalName: "Thor Odinson",
+    status: "Active"
+)
+thor.featured_image.attach(io: File.open(Rails.root.join('app/assets/images/thor.jpeg')), filename: 'thor.jpeg', content_type: 'image/jpeg')
+thor.save!
