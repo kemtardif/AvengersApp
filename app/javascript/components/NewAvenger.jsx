@@ -1,19 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-class NewRAvenger extends React.Component {
+class NewAvenger extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         name: "",
         legalName: "",
         status: "",
-        description = "",
-        featured_image = null,
-        age = ""
+        featured_image : null
       };
   
       this.onChange = this.onChange.bind(this);
+      this.onImageChange = this.onImageChange.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
       this.stripHtmlEntities = this.stripHtmlEntities.bind(this);
     }
@@ -27,29 +26,34 @@ class NewRAvenger extends React.Component {
       onChange(event) {
         this.setState({ [event.target.name]: event.target.value });
       }
+
+      onImageChange(event) { 
+        this.setState({ featured_image : event.target.files[0] });
+      };
     
       onSubmit(event) {
         event.preventDefault();
-        const url = "/api/v1/recipes/create";
-        const { name, ingredients, instruction } = this.state;
+        const url = "/avengers/create";
+
+        const { name, legalName, status, featured_image} = this.state;
     
-        if (name.length == 0 || ingredients.length == 0 || instruction.length == 0)
+        if (name.length == 0 || legalName.length == 0 || status.length == 0)
           return;
     
-        const body = {
-          name,
-          ingredients,
-          instruction: instruction.replace(/\n/g, "<br> <br>")
-        };
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('legalName', legalName);
+        formData.append('status', status);
+        formData.append('featured_image', featured_image);
     
         const token = document.querySelector('meta[name="csrf-token"]').content;
+
         fetch(url, {
           method: "POST",
           headers: {
-            "X-CSRF-Token": token,
-            "Content-Type": "application/json"
+            "X-CSRF-Token": token
           },
-          body: JSON.stringify(body)
+          body:formData
         })
           .then(response => {
             if (response.ok) {
@@ -57,7 +61,7 @@ class NewRAvenger extends React.Component {
             }
             throw new Error("Network response was not ok.");
           })
-          .then(response => this.props.history.push(`/recipe/${response.id}`))
+          .then(response => this.props.history.push(`/avenger/${response.name.replace(/ /g, '')}`))
           .catch(error => console.log(error.message));
       }
 
@@ -67,48 +71,43 @@ class NewRAvenger extends React.Component {
             <div className="row">
               <div className="col-sm-12 col-lg-6 offset-lg-3">
                 <h1 className="font-weight-normal mb-5">
-                  Add a new recipe to our awesome recipe collection.
+                  Add an Avenger to the catalogue, yo!
                 </h1>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                    <label htmlFor="recipeName">Recipe name</label>
+                    <label htmlFor="AvengerLegalName">Avenger legal name</label>
                     <input
                       type="text"
-                      name="name"
-                      id="recipeName"
+                      name="legalName"
+                      id="AvengerLegalName"
                       className="form-control"
                       required
                       onChange={this.onChange}
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="recipeIngredients">Ingredients</label>
+                    <label htmlFor="AvengerName">Avenger name</label>
                     <input
                       type="text"
-                      name="ingredients"
-                      id="recipeIngredients"
+                      name="name"
+                      id="AvengerName"
                       className="form-control"
                       required
                       onChange={this.onChange}
                     />
-                    <small id="ingredientsHelp" className="form-text text-muted">
-                      Separate each ingredient with a comma.
-                    </small>
                   </div>
-                  <label htmlFor="instruction">Preparation Instructions</label>
-                  <textarea
-                    className="form-control"
-                    id="instruction"
-                    name="instruction"
-                    rows="5"
-                    required
-                    onChange={this.onChange}
-                  />
-                  <button type="submit" className="btn custom-button mt-3">
-                    Create Recipe
+                  <select className="form-control" id="avengerStatus" name = "status" required onChange={this.onChange}>
+                    <option>Active</option>
+                    <option>Inactive</option>
+                    <option>He ded</option>
+                  </select>
+                    <label htmlFor="featured_image">Upload an avatar</label>
+                    <input type="file" accept="image/*" multiple={false} name = "featured_image" id= "AvengerImage" className="form-control" onChange={this.onImageChange}/>
+                  <button type="submit" className="btn custom-button mt-3" >
+                    Create Avenger!
                   </button>
-                  <Link to="/recipes" className="btn btn-link mt-3">
-                    Back to recipes
+                  <Link to="/avengers" className="btn btn-link mt-3">
+                    Back to Avengers
                   </Link>
                 </form>
               </div>
@@ -119,4 +118,4 @@ class NewRAvenger extends React.Component {
     
   }
   
-  export default NewRecipe;
+  export default NewAvenger;

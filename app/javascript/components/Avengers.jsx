@@ -48,7 +48,7 @@ class Avengers extends React.Component {
         const noAvenger = (
           <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
             <h4>
-              No Avenger yet. Create one!<Link to="/new_avenger">create one</Link>
+              No Avenger yet. Create one!<Link to="/avenger">AVENGERS YAY</Link>
             </h4>
           </div>
         );
