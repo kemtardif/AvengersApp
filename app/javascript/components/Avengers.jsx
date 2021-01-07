@@ -63,7 +63,7 @@ class Avengers extends React.Component {
                 </p>
               </div>
             </section>
-            <div className="py-5">
+            <div className="py-5" style = { {backgroundImage : "url(background.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
               <main className="container">
                 <div className="text-right mb-3">
                   <Link to="/avenger" className="btn custom-button">
