@@ -28,8 +28,8 @@ class Avengers extends React.Component {
     }
     render() {
         const { avengers } = this.state;
-        const allAvengers = avengers.map((avenger, index) => (
-          <div key={index} >
+        const allAvengers = avengers.map((avenger) => (
+          <div key={avenger.id} className="container">
             <img
                 src={avenger.featured_image.url}
                 alt={`${avenger.name} image`}
@@ -38,7 +38,12 @@ class Avengers extends React.Component {
             <div class="container">
               <div class="row">
                 <div class="col">
-                  <Link to={`/avenger/${avenger.name.replace(/ /g, '')}`} className="btn btn-primary btn-block">
+                  <Link to=
+                            {{
+                              pathname: `/avenger/${avenger.name}`,
+                              state: { id : `${avenger.id}` }
+                            }}
+                   className="btn btn-primary btn-block" style = { { fontFamily: 'Bangers'}}>
                     {avenger.name}
                   </Link>
                 </div>
@@ -55,22 +60,13 @@ class Avengers extends React.Component {
           </div>        
         ));
 
-        const noAvenger = (
-          <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
-            <h4>
-              No Avenger yet. Create one!<Link to="/avenger">AVENGERS YAY</Link>
-            </h4>
-          </div>
-        );
+
     
         return (
           <>
             <section className="jumbotron jumbotron-fluid text-center" style = { {backgroundImage : "url(marvel-banner.jpg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
               <div className="container py-5" >
-                <h1 className="display-4" style = { {color : "white" , fontFamily: 'verdana'}}> CATALOGUE</h1>
-                <p className="lead text-muted">
-
-                </p>
+                <h1 className="display-4" style = { {color : "black" , fontFamily: 'Bangers'}}> CATALOGUE</h1>
               </div>
             </section>
             <div className="py-5" style = { {backgroundImage : "url(background.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
