@@ -7,7 +7,7 @@ class NewAvenger extends React.Component {
       this.state = {
         name: "",
         legalName: "",
-        status: "",
+        status: "Active",
         featured_image : null
       };
   
@@ -44,7 +44,10 @@ class NewAvenger extends React.Component {
         formData.append('name', name);
         formData.append('legalName', legalName);
         formData.append('status', status);
-        formData.append('featured_image', featured_image);
+
+        if (featured_image != null){
+          formData.append('featured_image', featured_image);
+        }
     
         const token = document.querySelector('meta[name="csrf-token"]').content;
 
@@ -67,7 +70,7 @@ class NewAvenger extends React.Component {
 
       render() {
         return (
-          <div className="container mt-5">
+          <div className="container mt-5" style = { {backgroundImage : "url(background2.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
             <div className="row">
               <div className="col-sm-12 col-lg-6 offset-lg-3">
                 <h1 className="font-weight-normal mb-5">
@@ -96,14 +99,14 @@ class NewAvenger extends React.Component {
                       onChange={this.onChange}
                     />
                   </div>
-                  <select className="form-control" id="avengerStatus" name = "status" required onChange={this.onChange}>
-                    <option>Active</option>
-                    <option>Inactive</option>
-                    <option>He ded</option>
+                  <select className="form-control" id="avengerStatus" name = "status" onChange={this.onChange} defaultValue="Active">
+                    <option value= "Active">Active</option>
+                    <option value= "Inactive">Inactive</option>
+                    <option value= "He ded">He ded</option>
                   </select>
                     <label htmlFor="featured_image">Upload an avatar</label>
                     <input type="file" accept="image/*" multiple={false} name = "featured_image" id= "AvengerImage" className="form-control" onChange={this.onImageChange}/>
-                  <button type="submit" className="btn custom-button mt-3" >
+                  <button type="submit" className="btn btn-outline-danger mt-3" >
                     Create Avenger!
                   </button>
                   <Link to="/avengers" className="btn btn-link mt-3">

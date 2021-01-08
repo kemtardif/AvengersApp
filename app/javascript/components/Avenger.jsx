@@ -42,21 +42,22 @@ class Avenger extends React.Component {
       }
       render() {
         const avenger  = this.state;
-    
+      
         return (
-          <div className="">
+          <div style = { {backgroundImage : "url(background.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
             <div className="hero position-relative d-flex align-items-center justify-content-center">
               <img
                 src={`${avenger.thumbnail}/landscape_incredible.${avenger.extension}`}
                 alt={`${avenger.name} image`}
                 className="img-fluid position-absolute"
+                style = {{ objectFit: "cover"}}
               />
               <div className="overlay bg-dark position-absolute" />
-              <h1 className="display-4 position-relative text-white">
+              <h1 className="display-4 position-relative text-white" style={{fontFamily:"fantasy"}}>
                 {avenger.name}
               </h1>
             </div>
-            <div className="container py-5">
+            <div className="container py-5" >
               <div className="row">
                 <div className="col-sm-12 col-lg-3">
                     <h5 className="mb-2">Description</h5>
