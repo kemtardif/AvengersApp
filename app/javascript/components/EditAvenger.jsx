@@ -95,7 +95,7 @@ class EditAvenger extends React.Component {
         const  avenger  = this.state;
 
         return (
-          <div className="container mt-5" style = { {backgroundImage : "url(background2.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
+          <div className="container mt-5" style = { {backgroundImage : "url(background3.jpg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
             <div className="row">
               <div className="col-sm-12 col-lg-6 offset-lg-3">
                 <h1 className="font-weight-normal mb-5" style={{ color: 'red', fontFamily: "Bangers" }}>

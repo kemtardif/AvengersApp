@@ -33,6 +33,13 @@ gem 'jbuilder', '~> 2.5'
 # GEM USED FOR PROJECT #######
 gem "figaro"
 gem 'active_model_serializers'
+gem 'rack-cors', :require => 'rack/cors'
+gem 'devise'
+gem 'toastr-rails'
+gem 'jquery-rails'
+gem 'twitter-bootstrap-rails'
+gem 'devise-bootstrap-views'
+gem 'cancancan'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

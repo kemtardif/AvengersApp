@@ -1,19 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../components/Home";
-import Recipes from "../components/Recipes";
-import Recipe from "../components/Recipe";
 import Avengers from "../components/Avengers";
 import Avenger from "../components/Avenger";
+import NewAvenger from "../components/NewAvenger";
+import EditAvenger from "../components/EditAvenger";
 
 export default (
   <Router>
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/recipes" exact component={Recipes} />
       <Route path="/avengers" exact component={Avengers} />
       <Route path="/avenger/:name" exact component={Avenger} />
-      <Route path="/recipe/:id" exact component={Recipe} />
+      <Route path="/editAvenger/:name" exact component={EditAvenger} />
+      <Route path="/avenger" exact component={NewAvenger} />
+
     </Switch>
   </Router>
 );

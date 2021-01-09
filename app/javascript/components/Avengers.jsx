@@ -75,6 +75,9 @@ class Avengers extends React.Component {
                   <Link to="/avenger" className="btn btn-danger" style={{ fontFamily: "Bangers" }}>
                     Create New Avenger
                   </Link>
+                  <a data-method="delete" href="/users/sign_out" >
+                      <button type="button" class="btn btn-info" style={{ fontFamily: "Bangers" }}>Logout</button>
+                  </a> 
                 </div>
                   <Carousel   
                             additionalTransfrom={0}

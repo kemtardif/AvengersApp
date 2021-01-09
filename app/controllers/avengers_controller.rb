@@ -1,5 +1,4 @@
 class AvengersController < ApplicationController
-
   def index
     avenger = Avenger.all.order(created_at: :desc)
     render json: avenger
@@ -7,6 +6,7 @@ class AvengersController < ApplicationController
 
   def create
     avenger = Avenger.create!(avenger_params)
+
     if avenger
       render json: avenger
     else
@@ -27,13 +27,23 @@ class AvengersController < ApplicationController
     render json: { message: 'You deleted an Avenger, NOOOO!' }
   end
 
+  def update
+    if avenger.update(avenger_params)     
+      render json: avenger
+    else
+      render json: avenger.errors
+    end
+
+  end
+
   private 
 
   def avenger_params
-    params.permit(:name, :legalName, :status, :featured_image)
+    params.permit(:id, :name, :legalName, :status, :featured_image)
   end
 
   def avenger
     @avenger ||= Avenger.find(params[:id])
   end
+
 end
