@@ -64,7 +64,7 @@ class NewAvenger extends React.Component {
             }
             throw new Error("Network response was not ok.");
           })
-          .then(response => this.props.history.push(`/avenger/${response.name.replace(/ /g, '')}`))
+          .then(response => this.props.history.push(`/avenger/${response.name.replace(/ /g, '')}`, {id: response.id}))
           .catch(error => console.log(error.message));
       }
 
@@ -73,12 +73,12 @@ class NewAvenger extends React.Component {
           <div className="container mt-5" style = { {backgroundImage : "url(background2.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
             <div className="row">
               <div className="col-sm-12 col-lg-6 offset-lg-3">
-                <h1 className="font-weight-normal mb-5" style={{ color: 'red' }}>
+                <h1 className="font-weight-normal mb-5" style={{ color: 'red', fontFamily: "Bangers"}}>
                   Add an Avenger to the catalogue, yo!
                 </h1>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
-                    <label htmlFor="AvengerLegalName" style={{ color: 'blue' }}>Avenger legal name</label>
+                    <label htmlFor="AvengerLegalName" style={{ color: 'blue', fontFamily: "Bangers"}}>Avenger legal name</label>
                     <input
                       type="text"
                       name="legalName"
@@ -89,7 +89,7 @@ class NewAvenger extends React.Component {
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="AvengerName" style={{ color: 'red' }}>Avenger name</label>
+                    <label htmlFor="AvengerName" style={{ color: 'red', fontFamily: "Bangers" }}>Avenger name</label>
                     <input
                       type="text"
                       name="name"
@@ -104,12 +104,12 @@ class NewAvenger extends React.Component {
                     <option value= "Inactive">Inactive</option>
                     <option value= "He ded">He ded</option>
                   </select>
-                    <label htmlFor="featured_image" style={{ color: 'blue' }}>Upload an avatar</label>
+                    <label htmlFor="featured_image" style={{ color: 'blue', fontFamily: "Bangers" }}>Upload an avatar</label>
                     <input type="file" accept="image/*" multiple={false} name = "featured_image" id= "AvengerImage" className="form-control" onChange={this.onImageChange}/>
-                  <button type="submit" className="btn btn-outline-danger mt-3" >
+                  <button type="submit" className="btn btn-outline-danger mt-3" style={{fontFamily: "Bangers" }}>
                     Create Avenger!
                   </button>
-                  <Link to="/avengers" className="btn btn-outline-primary mt-3">
+                  <Link to="/avengers" className="btn btn-outline-primary mt-3" style={{fontFamily: "Bangers" }}>
                     Back to Avengers
                   </Link>
                 </form>

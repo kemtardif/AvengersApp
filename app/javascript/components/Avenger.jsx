@@ -32,10 +32,7 @@ class Avenger extends React.Component {
         "X-CSRF-Token": token
       }})
       .then(response => {
-        if (response.ok) {
           return this.props.history.push(`/avengers`);
-        }
-        throw new Error("Couldn`t destroy hero!");
       })
     }
 
@@ -73,7 +70,7 @@ class Avenger extends React.Component {
           .then(([respBack, respMarvel, respInfo]) => {
             this.setState({   id : respBack.id,   
                               name : respBack.name,
-                              regalName : respBack.legalName,
+                              legalName : respBack.legalName,
                               status : respBack.status,
                               firstAppearance: respInfo.results[0].biography["first-appearance"],
                               placeOfBirth: respInfo.results[0].biography["place-of-birth"],
@@ -99,54 +96,59 @@ class Avenger extends React.Component {
                 style = {{ objectFit: "cover", display: "block"}}
               />
               <div className="overlay bg-dark position-absolute" />
-              <h1 className="display-4 position-relative text-white" style={{fontFamily:"fantasy"}}>
+              <h1 className="display-4 position-relative text-white" style={{ fontFamily: "Bangers"}}>
                 {avenger.name}
               </h1>
             </div>
             <div className="container py-5" >
               <div className="row">
                 <div className="col-sm-12 col-lg-3">
-                    <h5 className="mb-2">Description</h5>
+                    <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Description</h5>
                     {avenger.description}
                 </div>
                 <div className="col-sm-12 col-lg-3">
-                  <h5 className="mb-2">Personnal Information</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Personnal Information</h5>
                   <div className="row">
-                  <h5 className="mb-2">Name :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Name :</h5>
                       {avenger.name}
                   </div>
                   <div className="row">
-                  <h5 className="mb-2">Legal Name :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Legal Name :</h5>
                       {avenger.legalName}
                   </div>
                   <div className="row">
-                  <h5 className="mb-2">Status :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Status :</h5>
                       {avenger.status}
                   </div>
                 </div>
                 <div className="col-md-auto col-lg-3">
-                  <h5 className="mb-2">Additional Information</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Additional Information</h5>
                   <div className="row">
-                  <h5 className="mb-2">Place of Birth:</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Place of Birth:</h5>
                       {avenger.placeOfBirth}
                   </div>
                   <div className="row">
-                  <h5 className="mb-2">First Appearance :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>First Appearance :</h5>
                       {avenger.firstAppearance}
                   </div>
                   <div className="row">
-                  <h5 className="mb-2">Race :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Race :</h5>
                       {avenger.race}
                   </div>
                 </div>
                 <div className="col-md-auto col-lg-3">
-                <button  className="btn btn-outline-success mt-3" >
-                    Update {avenger.name}
-                  </button>
-                  <button className="btn btn-outline-danger mt-3" onClick={this.destroyHero}>
+                <Link to={{
+                              pathname: `/editAvenger/${avenger.name}`,
+                              state: { id : `${avenger.id}` }
+                            }}
+                          className="btn btn-outline-success mt-3" 
+                          style={{ fontFamily: "Bangers"}}>
+                    Edit {avenger.name}
+                  </Link>
+                  <button className="btn btn-outline-danger mt-3" onClick={this.destroyHero} style={{ fontFamily: "Bangers"}}>
                     Destroy {avenger.name}!
                   </button>
-                  <Link to="/avengers" className="btn btn-link mt-3">
+                  <Link to="/avengers" className="btn btn-link mt-3" style={{ fontFamily: "Bangers"}}>
                     Back to Avengers
                   </Link>
                 </div>

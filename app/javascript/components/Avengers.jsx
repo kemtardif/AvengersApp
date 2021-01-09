@@ -50,10 +50,10 @@ class Avengers extends React.Component {
                 <div class="col"></div>
                 <div class="w-100"></div>
                 <div class="col">
-                  <h5>{avenger.legalName}</h5>
+                  <h5 style = { { fontFamily: 'Bangers'}}>{avenger.legalName}</h5>
                 </div>
                 <div class="col">
-                  <p>{avenger.status}</p>
+                  <p style = { { fontFamily: 'Bangers'}}>{avenger.status}</p>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@ class Avengers extends React.Component {
             <div className="py-5" style = { {backgroundImage : "url(background.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
               <main className="container">
                 <div className="text-right mb-3">
-                  <Link to="/avenger" className="btn btn-danger">
+                  <Link to="/avenger" className="btn btn-danger" style={{ fontFamily: "Bangers" }}>
                     Create New Avenger
                   </Link>
                 </div>
