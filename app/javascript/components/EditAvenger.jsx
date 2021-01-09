@@ -10,6 +10,7 @@ class EditAvenger extends React.Component {
             legalName: "",
             status: "",
             featured_image: null,
+            attachment: null,
             imageURL:""        
         };
 
@@ -23,14 +24,14 @@ class EditAvenger extends React.Component {
     }
 
     onImageChange(event) { 
-        this.setState({ featured_image: event.target.files[0],
+        this.setState({ attachment: event.target.files[0],
                         imageURL: URL.createObjectURL(event.target.files[0]) });
       };
    
     onSubmit(event) {
         event.preventDefault();
 
-        const { id, name, legalName, status, featured_image} = this.state;
+        const { id, name, legalName, status, attachment} = this.state;
         const url = `/avengers/update/${ id }`;
 
         if (name.length == 0 || legalName.length == 0 || status.length == 0)
@@ -40,7 +41,9 @@ class EditAvenger extends React.Component {
         formData.append('name', name);
         formData.append('legalName', legalName);         
         formData.append('status', status);       
-        formData.append('featured_image', featured_image);
+        if (attachment != null){
+            formData.append('featured_image', attachment);
+          }
 
     
         const token = document.querySelector('meta[name="csrf-token"]').content;          
