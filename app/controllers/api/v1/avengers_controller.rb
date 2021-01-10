@@ -1,4 +1,5 @@
-class AvengersController < ApplicationController
+class Api::V1::AvengersController < ApplicationController
+  load_and_authorize_resource
   def index
     avenger = Avenger.all.order(created_at: :desc)
     render json: avenger
@@ -24,7 +25,7 @@ class AvengersController < ApplicationController
 
   def destroy
     avenger&.destroy
-    render json: { message: 'You deleted an Avenger, NOOOO!' }
+    format.html { redirect_to request.referer, alert: 'Avenger destroyed!' }
   end
 
   def update

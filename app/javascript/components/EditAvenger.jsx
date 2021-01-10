@@ -32,7 +32,6 @@ class EditAvenger extends React.Component {
         event.preventDefault();
 
         const { id, name, legalName, status, attachment} = this.state;
-        const url = `/avengers/update/${ id }`;
 
         if (name.length == 0 || legalName.length == 0 || status.length == 0)
           return;
@@ -40,14 +39,15 @@ class EditAvenger extends React.Component {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('legalName', legalName);         
-        formData.append('status', status);       
+        formData.append('status', status);    
+
         if (attachment != null){
             formData.append('featured_image', attachment);
           }
 
     
         const token = document.querySelector('meta[name="csrf-token"]').content;          
-        fetch(url , {
+        fetch(`/api/v1/avengers/${ id }` , {
             method: "PUT",
             headers: {
               "X-CSRF-Token": token
@@ -60,24 +60,24 @@ class EditAvenger extends React.Component {
             }
             throw new Error("Network response was not ok.");
         })
-        .then(response => this.props.history.push(`/avenger/${response.name.replace(/ /g, '')}`, {id: response.id}))
+        .then(response => this.props.history.push(`/avenger/${response.id}`))
         .catch(error => console.log(error.message));
     }
 
     componentDidMount() {
         const {
-            location:{
-              state: { id }
+            match:{
+              params: { id }
             }
           } = this.props;
 
-        const url = `/avengers/show/${ id }`;
+        const url = `/api/v1/avengers/${ id }`;
         fetch(url)
             .then(response => {
                 if (response.ok) {
                     return response.json();            
                 }
-                throw new Error("Problem with response");
+                throw new Error("Problem with back-end call");
             })
             .then(response => {
                 this.setState({ id: response.id,
@@ -95,7 +95,7 @@ class EditAvenger extends React.Component {
         const  avenger  = this.state;
 
         return (
-          <div className="container mt-5" style = { {backgroundImage : "url(background3.jpg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
+          <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center" style = { {backgroundImage : "url(editbackground.jpg)"}}>
             <div className="row">
               <div className="col-sm-12 col-lg-6 offset-lg-3">
                 <h1 className="font-weight-normal mb-5" style={{ color: 'red', fontFamily: "Bangers" }}>

@@ -11,10 +11,9 @@ export default (
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/avengers" exact component={Avengers} />
-      <Route path="/avenger/:name" exact component={Avenger} />
-      <Route path="/editAvenger/:name" exact component={EditAvenger} />
+      <Route path="/avengers/:id" exact component={Avenger} />
+      <Route path="/avengers/:id/edit" exact component={EditAvenger} />
       <Route path="/avenger" exact component={NewAvenger} />
-
     </Switch>
   </Router>
 );

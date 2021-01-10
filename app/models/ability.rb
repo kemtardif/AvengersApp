@@ -8,7 +8,9 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
     if user.admin_role?
-      can :manage, User
+      can :manage, Avenger
+    else
+      can :read, Avenger
     end
   end
 end

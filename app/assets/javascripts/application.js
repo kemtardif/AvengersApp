@@ -16,5 +16,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require toastr
-//= require twitter/bootstrap
+
 //= require_tree .

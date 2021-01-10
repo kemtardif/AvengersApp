@@ -1,9 +1,12 @@
 /* ...
 *= require toastr
-*= require twitter-bootstrap-static/bootstrap
 *= require_self
 *= require_tree .
 */
+html, body, body > div, .app {
+  height: 100%; 
+  width: 100%;
+}
  
  .bg_primary-color {
     background-color: #FFFFFF;

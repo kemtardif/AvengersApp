@@ -33,14 +33,13 @@ class NewAvenger extends React.Component {
     
       onSubmit(event) {
         event.preventDefault();
-        const url = "/avengers/create";
-
         const { name, legalName, status, featured_image} = this.state;
     
         if (name.length == 0 || legalName.length == 0 || status.length == 0)
           return;
     
         const formData = new FormData();
+
         formData.append('name', name);
         formData.append('legalName', legalName);
         formData.append('status', status);
@@ -51,7 +50,7 @@ class NewAvenger extends React.Component {
     
         const token = document.querySelector('meta[name="csrf-token"]').content;
 
-        fetch(url, {
+        fetch("/api/v1/avengers", {
           method: "POST",
           headers: {
             "X-CSRF-Token": token
@@ -64,17 +63,17 @@ class NewAvenger extends React.Component {
             }
             throw new Error("Network response was not ok.");
           })
-          .then(response => this.props.history.push(`/avenger/${response.name.replace(/ /g, '')}`, {id: response.id}))
+          .then(response => this.props.history.push(`/avengers/${response.id}`))
           .catch(error => console.log(error.message));
       }
 
       render() {
         return (
-          <div className="container mt-5" style = { {backgroundImage : "url(background2.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
+          <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center" style = { {backgroundImage : "url(background2.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
             <div className="row">
-              <div className="col-sm-12 col-lg-6 offset-lg-3">
-                <h1 className="font-weight-normal mb-5" style={{ color: 'red', fontFamily: "Bangers"}}>
-                  Add an Avenger to the catalogue, yo!
+              <div className=" col offset-lg-3">
+                <h1 className="font-weight-normal " style={{ color: 'red', fontFamily: "Bangers"}}>
+                  Add an Avenger to the catalogue!
                 </h1>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
@@ -106,12 +105,14 @@ class NewAvenger extends React.Component {
                   </select>
                     <label htmlFor="featured_image" style={{ color: 'blue', fontFamily: "Bangers" }}>Upload an avatar</label>
                     <input type="file" accept="image/*" multiple={false} name = "featured_image" id= "AvengerImage" className="form-control" onChange={this.onImageChange}/>
+                    <div className= "row">
                   <button type="submit" className="btn btn-outline-danger mt-3" style={{fontFamily: "Bangers" }}>
                     Create Avenger!
                   </button>
                   <Link to="/avengers" className="btn btn-outline-primary mt-3" style={{fontFamily: "Bangers" }}>
                     Back to Avengers
                   </Link>
+                  </div>
                 </form>
               </div>
             </div>
