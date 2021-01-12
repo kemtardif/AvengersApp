@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import {isAdministrator} from "../components/isAdministrator";
 var md5 = require('md5');
 
 class Avenger extends React.Component {
@@ -14,9 +15,12 @@ class Avenger extends React.Component {
                     race:"",
                     description: "No description available", 
                     thumbnail: "",
-                    extension: ""
+                    extension: "",
+                    isAdmin: false
                      };
       this.destroyHero = this.destroyHero.bind(this);
+
+
   
     }
 
@@ -42,6 +46,8 @@ class Avenger extends React.Component {
           params: { id }
         }
       } = this.props;
+
+
            
         const publicKey = "6429deaf421bde956b828a9cf6f5fe3b"
         const privateKey = "f3b8e217acc71850f6cbbca17adb9e92aa6744a1"
@@ -49,6 +55,7 @@ class Avenger extends React.Component {
         const ts = Date.now(); 
         const stringToHash = ts + privateKey + publicKey;
         const hash = md5(stringToHash);
+       
 
           fetch(`/api/v1/avengers/${ id }`)
             .then((response) => {
@@ -62,7 +69,7 @@ class Avenger extends React.Component {
                   id : response.id,   
                   name : response.name,
                   legalName : response.legalName,
-                  status : response.status,
+                  status : response.status
                 })
 
                 let baseUrl = `https://gateway.marvel.com:443/v1/public/characters?name=${ response.name }&`;
@@ -87,7 +94,10 @@ class Avenger extends React.Component {
                                       extension:respMarvel.data.results[0].thumbnail.extension
 
                                   })
-                        });
+                        })
+
+  isAdministrator(this);   
+                 
           
       }
       render() {
@@ -144,16 +154,15 @@ class Avenger extends React.Component {
                   </div>
                 </div>
                 <div className="col-md-auto col-lg-3">
-                <Link to={{
-                              pathname: `/avengers/${avenger.id}/edit`,
-                            }}
-                          className="btn btn-outline-success mt-3" 
-                          style={{ fontFamily: "Bangers"}}>
+                { avenger.isAdmin &&
+                  <Link to={{pathname: `/avengers/${avenger.id}/edit`,}}className="btn btn-outline-success mt-3" style={{ fontFamily: "Bangers"}}>
                     Edit {avenger.name}
                   </Link>
+                  }{ avenger.isAdmin &&
                   <button className="btn btn-outline-danger mt-3" onClick={this.destroyHero} style={{ fontFamily: "Bangers"}}>
                     Destroy {avenger.name}!
                   </button>
+                    }
                   <Link to="/avengers" className="btn btn-link mt-3" style={{ fontFamily: "Bangers"}}>
                     Back to Avengers
                   </Link>

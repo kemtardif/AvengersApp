@@ -11,6 +11,7 @@ class Ability
       can :manage, Avenger
     else
       can :read, Avenger
+      can [:read, :isAdmin], Avenger
     end
   end
 end

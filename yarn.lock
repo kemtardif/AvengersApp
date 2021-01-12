@@ -6117,7 +6117,7 @@
   "resolved" "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz"
   "version" "1.0.1"
 
-"prop-types@^15.0.0", "prop-types@^15.5.4", "prop-types@^15.5.8", "prop-types@^15.6.2", "prop-types@^15.7.2":
+"prop-types@^15.0.0", "prop-types@^15.5.4", "prop-types@^15.5.8", "prop-types@^15.6.1", "prop-types@^15.6.2", "prop-types@^15.7.2":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -6276,7 +6276,7 @@
     "iconv-lite" "0.4.24"
     "unpipe" "1.0.0"
 
-"react-dom@^17.0.1", "react-dom@>= 16.3.0", "react-dom@>0.13.0":
+"react-dom@^17.0.1", "react-dom@>= 16.3.0", "react-dom@>=15 <= 17", "react-dom@>0.13.0":
   "integrity" "sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug=="
   "resolved" "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz"
   "version" "17.0.1"
@@ -6291,6 +6291,13 @@
   "version" "0.0.21"
   dependencies:
     "prop-types" "^15.5.8"
+
+"react-flash-message@^1.0.5":
+  "integrity" "sha512-Xaza4Tub+ByjaPkBlMYFCh34rZsyxSK1A63lpot10a8I+D8hUt9GfW2Sy1GVfUaClRBc2sBT7kYYXg7KGZTW4w=="
+  "resolved" "https://registry.npmjs.org/react-flash-message/-/react-flash-message-1.0.5.tgz"
+  "version" "1.0.5"
+  dependencies:
+    "prop-types" "^15.6.1"
 
 "react-is@^16.6.0", "react-is@^16.7.0", "react-is@^16.8.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
@@ -6372,7 +6379,7 @@
     "tiny-invariant" "^1.0.2"
     "tiny-warning" "^1.0.0"
 
-"react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^17.0.1", "react@>= 16.3.0", "react@>=15", "react@>0.13.0", "react@17.0.1":
+"react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^17.0.1", "react@>= 16.3.0", "react@>=15", "react@>=15 <= 17", "react@>0.13.0", "react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.yarnpkg.com/react/-/react-17.0.1.tgz"
   "version" "17.0.1"

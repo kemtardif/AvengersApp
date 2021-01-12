@@ -2,7 +2,7 @@ class Api::V1::AvengersController < ApplicationController
   load_and_authorize_resource
   def index
     avenger = Avenger.all.order(created_at: :desc)
-    render json: avenger
+      render json: avenger
   end
 
   def create
@@ -17,9 +17,9 @@ class Api::V1::AvengersController < ApplicationController
 
   def show
     if avenger
-      render json: avenger
+      render json:   avenger 
     else
-      render json: avenger.errors
+      render json:    avenger.errors 
     end
   end
 
@@ -37,6 +37,10 @@ class Api::V1::AvengersController < ApplicationController
 
   end
 
+  def isAdmin
+    render json: {isAdmin: current_user.admin_role}
+  end
+
   private 
 
   def avenger_params
@@ -46,5 +50,6 @@ class Api::V1::AvengersController < ApplicationController
   def avenger
     @avenger ||= Avenger.find(params[:id])
   end
+
 
 end

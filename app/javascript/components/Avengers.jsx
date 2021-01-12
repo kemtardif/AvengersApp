@@ -2,17 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import {isAdministrator}  from "../components/isAdministrator";
 
 class Avengers extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        avengers: []
+        avengers: [], 
+        isAdmin: false
       };
     }
 
     componentDidMount() {
         const url = "/api/v1/avengers";
+    
         fetch(url)
           .then(response => {
             if (response.ok) {
@@ -20,11 +23,17 @@ class Avengers extends React.Component {
             }
             throw new Error("Problem with response");
           })
-          .then(response => this.setState({ avengers: response }))
+          .then(response => {this.setState({ avengers: response })})
+
           .catch(() => this.props.history.push("/"));
+
+    isAdministrator(this);   
+
+           
     }
     render() {
-        const { avengers } = this.state;
+        const { avengers, isAdmin} = this.state;
+
         const allAvengers = avengers.map((avenger) => (
           <div key={avenger.id} className="container">
             <img
@@ -69,9 +78,11 @@ class Avengers extends React.Component {
             <div className="py-5" style = { {backgroundImage : "url(background.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
               <main className="container">
                 <div className="text-right mb-3">
+                  { isAdmin &&
                   <Link to="/avenger" className="btn btn-danger" style={{ fontFamily: "Bangers" }}>
                     Create New Avenger
                   </Link>
+                  }
                   <a data-method="delete" href="/users/sign_out" >
                       <button type="button" class="btn btn-info" style={{ fontFamily: "Bangers" }}>Logout</button>
                   </a> 

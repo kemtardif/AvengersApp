@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   
   namespace :api do
     namespace :v1 do
+      get "avengers/isAdmin"
       resources :avengers
+      
     end
   end
+
+
 
   root "homepage#index"
   ##Catch-all route redirecting unknown routes to homepage, with the ugly second line needed for Active record to display images
