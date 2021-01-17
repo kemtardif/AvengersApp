@@ -2,20 +2,34 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import {isAdministrator}  from "../components/isAdministrator";
+import  isAdministrator from "../components/isAdministrator";
+import MarvelBanner from "../images/marvel-banner.jpg"
+import Backgrounds from "../images/background.jpeg"
+
+
+
 
 class Avengers extends React.Component {
+  _isMounted = false;
+
     constructor(props) {
       super(props);
       this.state = {
-        avengers: [], 
-        isAdmin: false
+        avengers: []
+
       };
     }
 
+
     componentDidMount() {
+        this._isMounted = true;
         const url = "/api/v1/avengers";
-    
+
+        if(this.props.location.state?.isNotAllowed)
+        {
+          window.flash("You are not authorized on this page!", "danger");
+        }
+      
         fetch(url)
           .then(response => {
             if (response.ok) {
@@ -23,17 +37,21 @@ class Avengers extends React.Component {
             }
             throw new Error("Problem with response");
           })
-          .then(response => {this.setState({ avengers: response })})
+          .then(response => {if (this._isMounted) {
+              this.setState({ avengers: response})
+          }});
 
-          .catch(() => this.props.history.push("/"));
 
-    isAdministrator(this);   
-
-           
     }
-    render() {
-        const { avengers, isAdmin} = this.state;
 
+    componentWillUnmount() {
+      this._isMounted = false;
+    }
+  
+    render() {
+        const { avengers} = this.state;
+        const isAdmin = localStorage.getItem('isAdmin');
+        
         const allAvengers = avengers.map((avenger) => (
           <div key={avenger.id} className="container">
             <img
@@ -70,21 +88,21 @@ class Avengers extends React.Component {
     
         return (
           <>
-            <section className="jumbotron jumbotron-fluid text-center" style = { {backgroundImage : "url(marvel-banner.jpg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
+            <section className="jumbotron jumbotron-fluid text-center" style = { {backgroundImage : `url(${MarvelBanner})` , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
               <div className="container py-5" >
                 <h1 className="display-4" style = { {color : "black" , fontFamily: 'Bangers'}}> CATALOGUE</h1>
               </div>
             </section>
-            <div className="py-5" style = { {backgroundImage : "url(background.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
+            <div className="py-5" style = { {backgroundImage : `url(${Backgrounds})` , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
               <main className="container">
                 <div className="text-right mb-3">
-                  { isAdmin &&
+                  { (isAdmin === 'true') &&
                   <Link to="/avenger" className="btn btn-danger" style={{ fontFamily: "Bangers" }}>
                     Create New Avenger
                   </Link>
                   }
                   <a data-method="delete" href="/users/sign_out" >
-                      <button type="button" class="btn btn-info" style={{ fontFamily: "Bangers" }}>Logout</button>
+                      <button type="button" className="btn btn-info" style={{ fontFamily: "Bangers" }}>Logout</button>
                   </a> 
                 </div>
                   <Carousel   

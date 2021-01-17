@@ -1,19 +1,12 @@
 import React from 'react';
 
+async function isAdministrator()  {
+    const response = await fetch("/api/v1/avengers/isAdmin");
+    const data = await response.json();
 
+    return data.isAdmin;
+} 
 
-export async function isAdministrator (obj) {
-
-
-    const fetchAdmin = async () => {
-        fetch("/api/v1/avengers/isAdmin")
-        .then((response) => response.json())
-            .then((response) => obj.setState({isAdmin: response.isAdmin}) );
-       
-    };
-
-      return fetchAdmin();
-};
-
+export default isAdministrator;
 
 

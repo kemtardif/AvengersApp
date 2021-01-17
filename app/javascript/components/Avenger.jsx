@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import {isAdministrator} from "../components/isAdministrator";
+import isAdministrator from "../components/isAdministrator";
+
 var md5 = require('md5');
 
 class Avenger extends React.Component {
@@ -16,7 +17,9 @@ class Avenger extends React.Component {
                     description: "No description available", 
                     thumbnail: "",
                     extension: "",
-                    isAdmin: false
+                    showMessage: false,
+                    type:"",
+                    message:""
                      };
       this.destroyHero = this.destroyHero.bind(this);
 
@@ -35,8 +38,9 @@ class Avenger extends React.Component {
       headers: {
         "X-CSRF-Token": token
       }})
-      .then( () => this.props.history.push(`/avengers`) )
-      
+      .then( (response) => response.json() )
+      .then( (flash) => window.flash(flash.message, flash.type) )
+      .then( () => this.props.history.push({  pathname: '/avengers' }));
     }
 
     
@@ -55,7 +59,6 @@ class Avenger extends React.Component {
         const ts = Date.now(); 
         const stringToHash = ts + privateKey + publicKey;
         const hash = md5(stringToHash);
-       
 
           fetch(`/api/v1/avengers/${ id }`)
             .then((response) => {
@@ -94,14 +97,12 @@ class Avenger extends React.Component {
                                       extension:respMarvel.data.results[0].thumbnail.extension
 
                                   })
-                        })
+                        });
 
-  isAdministrator(this);   
-                 
-          
       }
       render() {
         const avenger  = this.state;
+        const isAdmin = localStorage.getItem('isAdmin');
       
         return (
           <div>
@@ -154,11 +155,11 @@ class Avenger extends React.Component {
                   </div>
                 </div>
                 <div className="col-md-auto col-lg-3">
-                { avenger.isAdmin &&
+                { (isAdmin === 'true') &&
                   <Link to={{pathname: `/avengers/${avenger.id}/edit`,}}className="btn btn-outline-success mt-3" style={{ fontFamily: "Bangers"}}>
                     Edit {avenger.name}
                   </Link>
-                  }{ avenger.isAdmin &&
+                  }{ (isAdmin === 'true') &&
                   <button className="btn btn-outline-danger mt-3" onClick={this.destroyHero} style={{ fontFamily: "Bangers"}}>
                     Destroy {avenger.name}!
                   </button>

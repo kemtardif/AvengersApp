@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Background2 from "../images/background2.jpeg"
 
 class NewAvenger extends React.Component {
     constructor(props) {
@@ -59,8 +60,10 @@ class NewAvenger extends React.Component {
         })
           .then(response => {
             if (response.ok) {
+              window.flash("Avenger succesfully created", "success") 
               return response.json();
             }
+            window.flash("There was a problem creating the avenger", "danger") 
             throw new Error("Network response was not ok.");
           })
           .then(response => this.props.history.push(`/avengers/${response.id}`))
@@ -69,7 +72,7 @@ class NewAvenger extends React.Component {
 
       render() {
         return (
-          <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center" style = { {backgroundImage : "url(background2.jpeg)" , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
+          <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center" style = { {backgroundImage : `url(${Background2})` , backgroundRepeat: 'no-repeat', backgroundSize: "cover"}}>
             <div className="row">
               <div className=" col offset-lg-3">
                 <h1 className="font-weight-normal " style={{ color: 'red', fontFamily: "Bangers"}}>

@@ -25,7 +25,7 @@ class Api::V1::AvengersController < ApplicationController
 
   def destroy
     avenger&.destroy
-    format.html { redirect_to request.referer, alert: 'Avenger destroyed!' }
+    render json: {message: "Avenger succesfully destroyed!", type: "danger"}
   end
 
   def update

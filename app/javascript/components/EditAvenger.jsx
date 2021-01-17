@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import EditBackground from "../images/editBackground.jpg"
 
 class EditAvenger extends React.Component {
     constructor(props) {
@@ -56,8 +57,10 @@ class EditAvenger extends React.Component {
         })
         .then(response => {
             if (response.ok) {
+                window.flash("Avenger succesfully updated", "success") 
                 return response.json();
             }
+        window.flash("There was a problem updating the Avenger", "danger") 
             throw new Error("Network response was not ok.");
         })
         .then(response => this.props.history.push(`/avengers/${response.id}`))
@@ -95,7 +98,7 @@ class EditAvenger extends React.Component {
         const  avenger  = this.state;
 
         return (
-          <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center" style = { {backgroundImage : "url(editbackground.jpg)"}}>
+          <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center" style = { {backgroundImage : `url(${EditBackground})`}}>
             <div className="row">
               <div className="col-sm-12 col-lg-6 offset-lg-3">
                 <h1 className="font-weight-normal mb-5" style={{ color: 'red', fontFamily: "Bangers" }}>
