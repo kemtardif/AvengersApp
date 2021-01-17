@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import isAdministrator from "../components/isAdministrator";
 
+
 var md5 = require('md5');
 
 class Avenger extends React.Component {
@@ -127,30 +128,30 @@ class Avenger extends React.Component {
                 <div className="col-sm-12 col-lg-3">
                   <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Personnal Information</h5>
                   <div className="row">
-                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Name :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Name : </h5>
                       {avenger.name}
                   </div>
                   <div className="row">
-                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Legal Name :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Legal Name : </h5>
                       {avenger.legalName}
                   </div>
                   <div className="row">
-                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Status :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Status : </h5>
                       {avenger.status}
                   </div>
                 </div>
                 <div className="col-md-auto col-lg-3">
                   <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Additional Information</h5>
                   <div className="row">
-                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Place of Birth:</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Place of Birth: </h5>
                       {avenger.placeOfBirth}
                   </div>
                   <div className="row">
-                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>First Appearance :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>First Appearance : </h5>
                       {avenger.firstAppearance}
                   </div>
                   <div className="row">
-                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Race :</h5>
+                  <h5 className="mb-2" style={{ fontFamily: "Bangers"}}>Race : </h5>
                       {avenger.race}
                   </div>
                 </div>
